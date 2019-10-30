@@ -1,0 +1,81 @@
+					Clock Type
+
+/*This program is going to create a class of clock type, able to set the time, print the time and able to do the comparison with the time, lastly separate the class into header file implementation file and source file.*/
+
+Algorithm
+House keeping 
+	1.1 #include <iostream>
+	1.2 using namespace std;
+	1.3 int main()
+     2. Crate a class that able to set the time, print the time, incrememting the time, and comparing the time.
+     3. Able to set the clock and incrementing the time by using function.
+     4. The user can also input the time and will cout the time that user input.
+
+
+clockType.h
+
+class clockType
+{
+public:
+	void setTime(int, int, int);
+	void getTime(int&, int&, int&) const;
+	void printTime() const;
+	void incrementSeconds();
+	void incrementMinutes();
+	void incrementHours();
+	bool equalTime(const clockType&);
+private:
+	int hr;
+	int min;
+	int sec;
+};
+
+
+#include <iostream>
+#include "clockType.h"
+
+
+
+using namespace std;
+
+
+
+int main()
+{
+	clockType myClock;
+	clockType yourClock;
+	int hours;
+	int minutes;
+	int seconds;
+	myClock.setTime(5, 4, 30);
+	cout << "line 2: myClock: ";
+	myClock.printTime();
+	cout << endl;
+	cout << "Line5 :yourClock:";
+	yourClock.printTime();
+	cout << endl;
+	yourClock.setTime(5, 45, 16);
+	cout << "Line9: After setting,yourClock: ";
+	yourClock.printTime();
+	cout << endl;
+	if (myClock.equalTime(yourClock))
+		cout << "Line 13: Both times are equal." << endl;
+	else
+		cout << "Line 15:The two times are not equal." << endl;
+	cout << "Line 16: Enter the hours, minutes, and seconds :";
+	cin >> hours >> minutes >> seconds;
+	cout << endl;
+	myClock.setTime(hours, minutes, seconds);
+	cout << "Line20: New myclock:";
+	myClock.printTime();
+	cout << endl;
+	myClock.incrementSeconds();
+	cout << "Line24: After incrementing myClock by one second, myClock: ";
+	myClock.printTime();
+	cout << endl;
+	myClock.getTime(hours, minutes, seconds);
+	cout << "Line 28: hours= " << hours << ", minutes= " << minutes << ", seconds= " << seconds << endl;
+	system("PAUSE");
+	return 0;
+}
+
