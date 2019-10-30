@@ -1,0 +1,101 @@
+#include <iostream>
+
+void recuresePrint(int);
+void recFun(int,int &);
+
+using namespace std;
+
+int main()
+{
+    int sum=0;
+    recuresePrint(4);
+    recFun(268,sum);
+    system("PAUSE");
+    return 0;
+}
+
+void recuresePrint(int n)
+{
+    if (n != 0)
+    {
+        cout << "Hip\n";
+        recuresePrint(n - 1);
+    }
+    else
+        cout << "Horray!" << endl;
+}
+
+void recFun(int x,int& sum)
+{
+    
+    
+    if (x > 10)
+    {
+        
+        recFun(x / 10,sum);
+        cout << x % 10 << endl;
+        sum+=x%10;
+      
+    }
+    else
+    {
+        cout << x << endl;
+        sum+=x;
+    }
+    cout<<"sum: "<<sum<<endl;
+}
+
+
+
+
+3.
+
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+bool recursive(char, char[],int);
+
+int main()
+{
+	int i = 0;
+	char letter;
+	char alphabet[8] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+	cout << "Enter a letter between a-z " << endl;
+	cin >> letter;
+	tolower(letter);
+
+	recursive(letter, alphabet,i);
+
+
+	system("PAUSE");
+	return 0;
+}
+bool recursive(char letter, char alphabet[8],int i)
+{
+
+	if (letter != alphabet[i])
+	{
+		if (i != 8)
+		{
+			i++;
+			recursive(letter, alphabet,i);
+		}
+		else
+		{
+			cout << "The abphabet is not found " << endl;
+			return false;
+		}
+
+	}
+	else
+	{
+		cout << "The letter " << letter << " is in the array spot: " << i << endl;
+		return true;
+	}
+
+}
+
+
+
