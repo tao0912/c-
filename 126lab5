@@ -1,0 +1,235 @@
+//Exercise #1
+#include<iostream>
+#include<cmath>
+using namespace std;
+double radius(double, double, double, double);
+double circumferece(double);
+double area(double);
+double pi = 3.14;
+
+int main()
+{
+	double x1, y1, x2, y2;
+	double r;
+	double cir;
+	double ar;
+	cout << "Enter 4 numbers corresponding to the ";
+	cout << "coordinates of two points";
+	cin >> x1 >> y1 >> x2 >> y2;
+	r = radius(x1, y1, x2, y2);
+	cout << "The radius is :" << r << endl;
+	cir = circumferece(r);
+	cout << "The circumferece is :" << cir << endl;
+	ar = area(r);
+	cout << "The area is :" << ar << endl;
+	system("PAUSE");
+	return 0;
+}
+
+
+
+double radius(double x1, double y1, double x2, double y2)
+{
+	return sqrt(static_cast<double>((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)));
+}
+double circumferece(double r)
+{
+	return 2 * pi*r;
+}
+double area(double r)
+{
+	return pi*pow(r,2);
+}
+
+//Exercise #2
+#include<iostream>
+#include<cmath>
+using namespace std;
+void printStarts(double);
+double addThem(double,double);
+int main()
+{
+	double num1, num2;
+	double sum;
+	double times;
+	cout << "Enter two numbers " << endl;
+	cin >> num1 >> num2;
+	sum = addThem(num1,num2);
+	for (times = 0; times < sum; times++)
+	{
+		printStarts(0);
+	}
+	system("PAUSE");
+}
+double addThem(double num1, double num2)
+{
+	return num1 + num2;
+}
+void printStarts(double sum)
+{
+	cout << "*****\n";
+}
+
+//Exercise #3
+#include<iostream>
+#include<cmath>
+#include<ctime>
+#include<cstdlib>
+using namespace std;
+void flipped(int);
+bool noMoreMoney(int &);
+
+int main()
+{
+	int flip;
+	int coin;
+	cout << "You start the game with $50." << endl;
+	cout << "How many times you want to flip the coins ?" << endl;
+	cin >> flip;
+	flipped(flip);
+
+
+}
+void flipped(int flip)
+{
+	srand(time(0));
+	int win = 0;//how many time did the user won
+	int lost = 0;//how many time did the user lost
+	int money = 50;//starting amonut
+	int times = 0;
+	bool heads;
+	while (flip > times&& !noMoreMoney(money))
+	{
+		if (rand() % 2 == 1)
+		{
+			heads = true;
+			money += 10;
+			win++;
+		}
+		else
+		{
+			heads = false;
+			money -= 10;
+			lost++;
+		}
+		times++;
+	}
+	cout << "The number times of heads is " << win << endl;
+	cout << "The number times of till is " << lost << endl;
+	cout << "You have won $ " << 10 * win << endl;
+	cout << "You have lost $ " << 10 * lost << endl;
+	cout << "Your total money is now $ " << money << endl;
+	system("PAUSE");
+}
+bool noMoreMoney(int& m)
+{
+	return m <= 0;
+
+}
+
+//Exercise #4
+#include<iostream>
+#include<cmath>
+#include<ctime>
+#include<cstdlib>
+#include <string>
+#include<cctype>
+void love();
+void school();
+void money();
+using namespace std;
+
+int main()
+{
+		char repeat;
+		srand(time(0));
+		double luckyNumber;
+		char choice;
+		cout << "Welcome to the Psychic Computer Network" << endl;
+		cout << "My name is Tao, and I will be your psychic computer gide\n" << endl;
+		cout << "Please Enter Your lucky number ";
+		cin >> luckyNumber;
+		cout << endl << endl;
+
+		do
+		{
+		
+		cout << "Please enter \"L\" for my predictions on your lovelife." << endl;
+		cout << "Please enter \"S\" for my predictions on your school life." << endl;
+		cout << "Please enter \"M\" for my predictions on your financial situation." << endl;
+		cin >> choice;
+		if (toupper(choice) == 'L')
+			love();
+		else if (toupper(choice) == 'S')
+			school();
+		else if (toupper(choice) == 'M')
+			money();
+		cout << "Would you like me to make another prediction? y/n " << endl;
+		cin >> repeat;
+		} 
+		while (repeat == 'y');
+		
+		
+		system("PAUSE");
+		return 0;
+	
+	
+}
+void love()
+{
+	
+	switch (rand() % 5 + 1)
+	{
+	case 1: cout << "getting marr in 5 years." << endl;
+		break;
+	case 2: cout << "getting a boy/girl friend in the next year." << endl;
+		break;
+	case 3: cout << "getting a boy this year" << endl;
+		break;
+	case 4: cout << "your boy/girlfriend cheating on you" << endl;
+		break;
+	case 5: cout << "you are going to falling love with someone" << endl;
+		break;
+	}
+
+}
+void school()
+{
+	
+	switch (rand() % 5 + 1)
+	{
+	case 1: cout << " English will be your best major if you are looking for one" << endl;
+		break;
+	case 2: cout << "Getting kick out of school in the next week" << endl;
+		break;
+	case 3: cout << "getting a A in MTH 229 class" << endl;
+		break;
+	case 4: cout << "Not gonna pass the ENS class, better to drop the class" << endl;
+		break;
+	case 5: cout << "School are going to give you scholarship" << endl;
+		break;
+	}
+}
+void money()
+{
+	
+	switch (rand() % 5 + 1)
+	{
+	case 1: cout << "getting rise in company" << endl;
+		break;
+	case 2: cout << "going to find $100 on the ground" << endl;
+		break;
+	case 3: cout << "going to lost money in stock" << endl;
+		break;
+	case 4: cout << "getting a huge amount of money with in a week" << endl;
+		break;
+	case 5: cout << "getting a rich girl along the way in New York" << endl;
+		break;
+	}
+}
+
+
+
+
+
+
