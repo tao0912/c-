@@ -1,0 +1,226 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+const int max = 1000;
+using namespace std;
+class tree
+{
+private:
+	int counter;//counter fot the id 
+	string array[max];
+	int total;//total for the vaild id
+	ifstream inaverage;
+	ifstream innmr;
+	ifstream inworst;
+	ofstream outaverage;
+	ofstream outnmr;
+	ofstream outworst;
+	/*
+	string nmr[40];
+
+	string id[1000];
+	string date[1000];
+	string time[1000];
+	int num[1000];
+	*/
+	struct binarytree//struct for tree
+	{
+		int data;
+		binarytree* Lchild;
+		binarytree* Rchild;
+	};
+	struct nodenmr //struct for nmr
+	{
+		string idnmr;
+		nodenmr*next;
+		//nodenmr*pre;
+	};
+
+	struct nodeaveragecase//struct for average case
+	{
+		string id;
+		string date;
+		string time;
+		int num;
+		nodeaveragecase*next;
+		//nodeevent*pre;
+	};
+	struct nodeworstcase//struct for worst case
+	{
+		string id;
+		string date;
+		string time;
+		int num;
+		nodeworstcase*next;
+	};
+
+	nodenmr*head;
+	nodenmr*tail;
+	nodenmr*now;
+	nodeaveragecase*head2;
+	nodeaveragecase*tail2;
+	nodeaveragecase*now2;
+	nodeworstcase*head3;
+	nodeworstcase*tail3;
+	nodeworstcase*now3;
+	binarytree*root;
+
+public:
+
+	bool openfile();
+	void readnmr();
+	void readevent();
+	void readworst();
+	void comparing();
+	void intree();
+	void deltree(string key);
+	void inorder();
+	void preorder();
+	void postorder();
+};
+int main()
+{
+	tree myID;//name the class
+	myID.openfile();//function call
+	myID.readnmr(); //funcation call for reading file
+	myID.readevent();
+	myID.readworst();
+	myID.comparing();
+	cout << "good" << endl;
+
+	system("PAUSE");
+	return 0;
+}
+bool tree::openfile()//open file
+{
+
+	inaverage.open("averagecase.txt");//test if file event opend or not
+	if (!inaverage)
+	{
+		cout << "error opening average case" << endl;
+		return 1;
+	}
+	innmr.open("nmr.txt");//test for the nmr file
+	if (!innmr)
+	{
+		cout << "error opening nmr" << endl;
+		return 1;
+	}
+	inworst.open("worstcase.txt");//test fo the worst case file
+	if (!inworst)
+	{
+		cout << "error opening worst case" << endl;
+		return 1;
+	}
+	return 0;
+}
+void tree::readnmr()//reading file for nmr
+{
+	nodenmr *tmp = new nodenmr;
+	//tmp=head;
+	innmr >> tmp->idnmr;
+	head = now = tmp;
+	while (!innmr.eof())
+	{
+		cout << tmp->idnmr << endl;
+		tmp=tmp->next;//moving to the next node
+		innmr >> tmp->idnmr;
+	}
+}
+void tree::readevent()//read file for averaeg case
+{
+	nodeaveragecase *tmp = new nodeaveragecase;
+	inaverage >> tmp->id;
+	inaverage >> tmp->date;
+	inaverage >> tmp->time;
+	inaverage >> tmp->num;
+	head2 = now2 = tmp;
+	while (!inaverage.eof())
+	{
+		// cout<<tmp->id<<endl;
+		// cout<<tmp->date<<endl;
+		// cout<<tmp->time<<endl;
+		//  cout<<tmp->num<<endl;
+		inaverage >> tmp->id;
+		inaverage >> tmp->date;
+		inaverage >> tmp->time;
+		inaverage >> tmp->num;
+		tmp = tmp->next;//moving to the next node
+	}
+}
+void tree::readworst()//read file worst
+{
+	nodeworstcase*tmp = new nodeworstcase;
+	inworst >> tmp->id;
+	inworst >> tmp->date;
+	inworst >> tmp->time;
+	inworst >> tmp->num;
+	head3 = now3 = tmp;
+	while (!inaverage.eof())
+	{
+		// cout<<tmp->id<<endl;
+		// cout<<tmp->date<<endl;
+		// cout<<tmp->time<<endl;
+		//  cout<<tmp->num<<endl;
+		inworst >> tmp->id;
+		inworst >> tmp->date;
+		inworst >> tmp->time;
+		inworst >> tmp->num;
+		tmp = tmp->next; //moving to the next node
+	}
+}
+void tree::comparing()//looking for the vaild id
+{
+	nodenmr*tmp = new nodenmr;
+	while (head->next != now)
+	{
+		tmp = tmp->next;
+		cout << tmp->idnmr << endl;
+		counter++;//counting the vaild id
+	}
+}
+void tree::intree()//put the vaild id in the tree
+{
+	if (head == 0) //when the tree is empty enter the first id in 
+		head->idnmr = array[0];
+	else //else strat from the counter
+	{
+		for (int i = 1; i <= counter; i++)//vaild id is in the tree for every node
+		{
+			//if node is x
+			//then node's left child in the array is 2x
+			//right child in 2x+1
+			//partent for the node x id x/2
+			//this is true for every node
+			head->next->idnmr= array[counter];
+		}
+	}
+}
+void tree::deltree(string key)//delete one node from the tree
+{
+	if (head == 0)//when tree is empty 
+		cout << "tree is empty" << endl;
+	else if (key < root->data)//delete from the left
+	{
+		root->Lchild = NULL;
+	}
+	else if (key > root->data)//delete from the right
+	{
+		root->Rchild = NULL;
+	}
+}
+void tree::inorder()
+{
+	//left -> root -> right
+
+}
+void tree::preorder()
+{
+	//root -> left -> right
+}
+void tree::postorder()
+{
+	//left-> right -> root
+}
+
+
