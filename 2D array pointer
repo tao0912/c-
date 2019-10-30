@@ -1,0 +1,89 @@
+Tao LIn
+
+211
+
+Extra Credit
+					2 dynamically dynamic arrays
+/*This program is going to create a 2 dynamically dynamic arrays and sum up every column/row, and add all the number together*/
+
+Algorithm
+1.House keeping
+	1.1. #include <iostream>
+	1.2. #include <iomanip>
+	1.3. Using namespace std;
+	1.4 int main()
+ 2. Create two function, one is for fill up the array with numbers and add every row/column together.
+3.create a pointer to pointer, then give the row/col size for the 2 dynamically dynamic array.
+4. Using a for loop to input the number and add the number from every row/col.
+5. Use the other function to add all the number together.
+
+
+
+
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+void fill(int ** ptr, int, int);//function for fill up the 2d array
+void sum(int** ptr, int, int);//add the number is the array
+
+int main()
+{
+    int **ptr;//a pointer to pointer
+    int row, col;
+    row = 3;
+    col = 4;
+    
+    ptr = new int*[row];//create a dynamicaly array for the row
+    for (int i = 0; i < row; i++)//in each row create a dynamicaly array for the column
+        ptr[i] = new int[col];
+    
+    fill(ptr, row, col);
+    sum(ptr, row, col);
+    
+    system("PAUSE");
+    return 0;
+}
+
+void fill(int** ptr, int row, int col)//pass down the pointer to pointer and the row&col
+{
+    int i, j;
+    int sum=0;
+    cout << "Enter 12 numbers for 2D array " << endl;
+    for (i = 0; i < row; i++)//loop strat fom the row
+        for (j = 0; j < col; j++)
+            cin >> ptr[i][j];//cin any 12 numbers
+    cout << "2D Dynamic Array " << endl;
+    
+    for (i = 0; i < row; i++)//print out
+    {
+        sum=0;
+        for (j = 0; j < col; j++)//add the sum for every row
+        {
+            cout<< ptr[i][j] << setw(4);
+            sum+=ptr[i][j];
+            
+        }
+        cout<<" | "<<sum<<endl;
+    }
+    cout<<"---------------- "<<endl;
+    for (j=0;j<col;j++)//print by column
+    {
+        sum=0;
+        for (i=0;i<row;i++)//add the sum for every column
+            sum+=ptr[i][j];
+        cout<<sum<<setw(4);
+    }
+    
+}
+void sum(int** ptr, int row, int col)//add all the number in the 2d array
+{
+    int i, j, sum = 0;
+    
+    for (i = 0; i < row; i++)
+        for (j = 0; j < col; j++)
+            sum += ptr[i][j];
+    cout << "\nsum: " << sum << endl;
+}
+
+
