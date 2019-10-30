@@ -1,0 +1,180 @@
+//Exercise #1
+#include<iostream>
+#include<fstream>
+#include<cstdlib>
+#include<ctime>
+#include<cmath>
+
+using namespace std;
+int main()
+{
+    int i=1;
+    int number;
+    srand(time(0));
+    ifstream indata;
+    ofstream outdata;	
+    outdata.open("myEvenRandoms.txt");
+    if (!outdata)
+    {
+        cout<<"fail opeing output fail.";
+        return 1;
+    }
+    while (i < 1000)
+    {
+        number = rand()%10 + 11;
+        if (number%2==0)
+            outdata<<number<<" ";
+        i++;
+    }
+	outdata.close();
+return 0;
+}
+
+
+
+//Exercise #2
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
+
+int howMany(string);
+int main()
+{
+	string inword;
+	cout << "please enter any word \n";
+	cin >> inword;
+
+	cout << "The number of the exactly same word is: " << howMany(inword) << endl;
+
+	system("PAUSE");
+	return 0;
+}
+int howMany(string inword)
+{
+	int i = 0;
+	string wordData;
+	ifstream indata;
+	indata.open("25words.txt");
+	if (!indata)
+	{
+		cout << "fail opeing input fail!!!";
+		return 1;
+	}
+
+	while (!indata.eof())
+	{
+		indata >> wordData;
+		if (wordData == inword)
+			i++;
+		else
+			i = i;
+	}
+	return i;
+}
+
+
+
+
+//25words.txt
+
+hello
+bye
+hello
+hello
+bye
+computer
+hello
+hello
+hello
+hello
+hello
+computer
+science
+english
+Hello	
+hello
+hello
+math
+hello
+computer
+science
+history
+hello
+hello
+hello
+
+//Exercise #3
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+
+using namespace std;
+bool rollingDice(int, char);
+
+int main()
+{
+	srand(time(0));
+	int numDice;
+	char c;
+	cout << "Welcome to the dice game" << endl;
+	cout << "how many dice do you want to roll at the same time?" << endl;
+	cin >> numDice;
+	cout << "what range of the number do you think is going to be?" << endl;
+	cout << "Smail: between ";
+	cout << numDice << " and " << numDice * 6 / 2 << "\n";
+	cout << "Big: between ";
+	cout << numDice * 6 / 2 + 1 << " and " << numDice * 6 << endl;
+	cout << "Enter s for smail, b for Big" << endl;
+	cin >> c;
+	tolower(c);
+
+	cout << rollingDice(numDice, c);
+
+	system("PAUSE");
+	return 0;
+}
+bool rollingDice(int numDice, char c)
+{
+	int dice;
+	int i = 0;
+	int number = 0;
+	while (i<numDice)
+	{
+		dice = rand() % 6 + 1;
+		number += dice;
+
+		i++;
+	}
+	cout << number << endl;
+
+
+
+	if (number >= numDice&&number <= numDice * 6 / 2 && c == 's')
+	{
+		cout << "Good Job" << endl;
+		return true;
+	}
+	else if (numDice * 6 / 2 + 1 && numDice * 6 && c == 'b')
+	{
+		cout << "Good Job" << endl;
+		return true;
+	}
+	else if (numDice * 6 / 2 + 1 && numDice * 6 && c == 's')
+	{
+		cout << "Wrong" << endl;
+		return false;
+	}
+	else if (number >= numDice&&number <= numDice * 6 / 2 && c == 'b')
+	{
+		cout << "Wrong" << endl;
+		return false;
+	}
+}
+
+
+
+
+
+
+
